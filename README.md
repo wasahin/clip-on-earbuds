@@ -7,6 +7,7 @@ In-depth analysis of **14 models across 10 brands** (open-ear & ear-cuff designs
 - **Best for Cantonese AI workflow:** Sanag S8S Ultra (your watchlist) — all AI features free forever, 130 languages, 50h battery
 - **Best sound + AI combo:** Huawei FreeClip 2 — Forbes "best open earbuds on the market"
 - **Best value:** Anker Soundcore AeroClip ($130) — best call clarity in tier
+- **2026 AI refresh pick:** Sanag S9S AI 2 (~$200) — 7 AI models, 138 languages, paywalled AI features
 - **Skip:** 1MORE S70 (NYT panned it), Bose Ultra Open at full price
 
 For Cantonese transcription:
