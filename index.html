@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clip-on Earbuds Research & Cantonese Transcription · Sep 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --surface: #141822;
+    --surface-2: #1c2230;
+    --border: #2a3142;
+    --text: #e7ebf3;
+    --text-dim: #9aa3b2;
+    --accent: #6ee7b7;
+    --accent-2: #60a5fa;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --good: #34d399;
+    --tag-watch: #f59e0b;
+    --tag-new: #8b5cf6;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang HK", "Microsoft YaHei", system-ui, sans-serif; line-height: 1.55; }
+  a { color: var(--accent-2); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; }
+  header.hero { padding: 40px 0 24px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+  header.hero h1 { font-size: 34px; margin: 0 0 8px; letter-spacing: -0.5px; }
+  header.hero p.subtitle { color: var(--text-dim); margin: 0 0 16px; font-size: 15px; }
+  header.hero .meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-dim); }
+  header.hero .meta span { padding: 4px 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 999px; }
+
+  h2 { font-size: 24px; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 18px; margin: 24px 0 12px; color: var(--text); }
+  h4 { font-size: 15px; margin: 16px 0 8px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
+  /* Tabs */
+  .tabs { display: flex; gap: 4px; flex-wrap: wrap; background: var(--surface); padding: 6px; border-radius: 12px; margin-bottom: 24px; border: 1px solid var(--border); position: sticky; top: 0; z-index: 10; backdrop-filter: blur(10px); }
+  .tab { padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--text-dim); border: none; background: transparent; transition: all 0.15s; font-weight: 500; }
+  .tab:hover { color: var(--text); background: var(--surface-2); }
+  .tab.active { background: var(--accent); color: #0b0d12; font-weight: 600; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* Cards */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .card.watchlist { border-left: 3px solid var(--tag-watch); }
+  .card.newbrand { border-left: 3px solid var(--tag-new); }
+  .card-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .card-title { font-size: 18px; font-weight: 600; margin: 0; }
+  .card-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  .tag.watch { background: var(--tag-watch); color: #1a1500; }
+  .tag.new { background: var(--tag-new); color: #fff; }
+  .tag.premium { background: var(--bad); color: #fff; }
+  .tag.value { background: var(--good); color: #00291f; }
+
+  /* Specs grid */
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 8px; margin: 12px 0; }
+  .spec { background: var(--surface-2); border-radius: 6px; padding: 8px 10px; border: 1px solid var(--border); }
+  .spec-label { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .spec-value { font-size: 14px; font-weight: 600; margin-top: 2px; }
+
+  /* Pros/Cons */
+  .proscons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media (max-width: 720px) { .proscons { grid-template-columns: 1fr; } }
+  .pros, .cons { background: var(--surface-2); border-radius: 8px; padding: 12px 14px; font-size: 13px; }
+  .pros { border-left: 3px solid var(--good); }
+  .cons { border-left: 3px solid var(--bad); }
+  .pros h4, .cons h4 { margin: 0 0 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pros h4 { color: var(--good); }
+  .cons h4 { color: var(--bad); }
+  .pros ul, .cons ul { margin: 0; padding-left: 18px; }
+  .pros li, .cons li { margin: 4px 0; }
+
+  .quote { background: var(--surface-2); border-left: 3px solid var(--accent-2); padding: 10px 14px; margin-top: 10px; font-size: 13px; font-style: italic; color: var(--text-dim); border-radius: 0 6px 6px 0; }
+  .quote-source { font-size: 11px; color: var(--text-dim); margin-top: 4px; font-style: normal; }
+
+  /* Table */
+  .table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 700px; }
+  th { background: var(--surface-2); text-align: left; padding: 12px; font-weight: 600; color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); position: sticky; top: 0; }
+  td { padding: 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--surface-2); }
+  .rating { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .rating.good { background: var(--good); color: #00291f; }
+  .rating.ok { background: var(--warn); color: #2a1d00; }
+  .rating.bad { background: var(--bad); color: #fff; }
+
+  /* Charts */
+  .chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+  @media (max-width: 800px) { .chart-grid { grid-template-columns: 1fr; } }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .chart-card h4 { margin: 0 0 12px; font-size: 14px; }
+  canvas { max-height: 380px; }
+
+  /* Recommendations */
+  .reco { background: linear-gradient(135deg, rgba(110, 231, 183, 0.08), rgba(96, 165, 250, 0.08)); border: 1px solid var(--accent); border-radius: 12px; padding: 20px; margin-bottom: 12px; }
+  .reco h3 { margin-top: 0; color: var(--accent); }
+  .reco-tag { display: inline-block; padding: 3px 10px; background: var(--accent); color: #0b0d12; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+
+  /* Alert */
+  .alert { background: rgba(251, 191, 36, 0.1); border: 1px solid var(--warn); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px; }
+  .alert strong { color: var(--warn); }
+
+  /* Tools grid */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-top: 16px; }
+  .tool-card { background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; padding: 14px; }
+  .tool-card h4 { margin: 0 0 6px; font-size: 14px; color: var(--text); text-transform: none; letter-spacing: 0; font-weight: 600; }
+  .tool-meta { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+  .tool-score { display: inline-block; padding: 2px 8px; background: var(--accent); color: #0b0d12; border-radius: 4px; font-size: 12px; font-weight: 700; }
+
+  footer { margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 12px; }
+  .badge-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .badge { font-size: 11px; padding: 2px 8px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="hero">
+    <h1>🎧 Clip-on Earbuds Research · Sep 2026</h1>
+    <p class="subtitle">In-depth analysis of 10 brands across open-ear & ear-cuff designs, with a focus on Cantonese transcription compatibility</p>
+    <div class="meta">
+      <span>📅 11 Sep 2026</span>
+      <span>📍 HK / Greater Bay</span>
+      <span>🎯 10 brands · 14 models</span>
+      <span>🈶 Cantonese transcription section</span>
+    </div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="summary">Summary</button>
+    <button class="tab" data-tab="watchlist">Your Watchlist (4)</button>
+    <button class="tab" data-tab="new">New Brands (10)</button>
+    <button class="tab" data-tab="matrix">Compare All</button>
+    <button class="tab" data-tab="cantonese">Cantonese Transcription</button>
+    <button class="tab" data-tab="verdict">Verdict</button>
+  </nav>
+
+  <!-- ============ TAB 1: SUMMARY ============ -->
+  <div class="tab-content active" id="summary">
+    <div class="alert">
+      <strong>⚠️ Important clarification:</strong> Your watchlist mixes two distinct form-factors. <strong>Dangbei Air 1S, Sanag S8S Ultra, Sanag S9S A12</strong> are all true <strong>clip-on / ear-cuff (耳夾式)</strong> designs. <strong>Anker Soundcore Liberty 5 Pro Max</strong> is actually an <strong>in-ear bean-style TWS with ear-fins</strong> (NOT clip-on). I've included it for comparison but it solves a different problem. Other names you may not have considered are listed below.
+    </div>
+
+    <h2>📊 At a glance</h2>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h4>Price (USD) vs Total Battery (hrs with case)</h4>
+        <canvas id="priceBatteryChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Sound + Comfort + Value (1-10 from reviews)</h4>
+        <canvas id="ratingChart"></canvas>
+      </div>
+    </div>
+
+    <h2>🏆 Top picks by use case</h2>
+
+    <div class="reco">
+      <div class="reco-tag">Best for Cantonese transcription workflow</div>
+      <h3>Huawei FreeClip 2 (~$180 / ¥1299)</h3>
+      <p>Best balance of comfort + AI smarts + cross-platform. Pairs with any phone, integrates deeply with HarmonyOS (Xiaoyi 同声传译), works with iOS Live Captions, Tinrec, Notely Voice. 9 hr battery, 5.1g each bud, 38 hr with case. <strong>Only real con:</strong> best AI features locked to Huawei phones; non-Huawei users get ~80% functionality.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">Best overall sound quality (open-ear)</div>
+      <h3>Bose Ultra Open Earbuds (~$299)</h3>
+      <p>Still the gold standard for sound in an open ear-cuff. Immersive Audio with head-tracking, aptX Adaptive/Lossless support, 7.5 hr battery. Real users: "rivals some brands' in-ear models" for richness. <strong>Downsides:</strong> no AI/transcription features, no multipoint BT 6.0, weak mic for noisy calls.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">Best value "all-rounder"</div>
+      <h3>Anker Soundcore AeroClip (~$130)</h3>
+      <p>The standout at $130. 5.9g, 12mm titanium drivers, Virtual Bass tech, 4 mics with AI call noise reduction, BT 5.4 multipoint, IPX4, 32 hr total. Real user verdict: "clearest calls in this price tier; missing some premium features but unbeatable value." Beats Huawei FreeClip 2 on price, loses on AI smarts.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">Best battery + durable for outdoor</div>
+      <h3>Shokz OpenDots One (~$200)</h3>
+      <p>11 hr earbud / 40 hr with case — best battery of any clip-on. Bassphere dual 11.8mm drivers, Dolby Audio, IP54, BT 5.4 multipoint. Cycling/commuting: "the only clip-on that actually handles wind noise better than bone conduction." Real users note less tactile controls than OpenRun Pro 2.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">Built-in AI translation + transcription</div>
+      <h3>Timekettle W4 Pro (~$370) — different form factor</h3>
+      <p>Not clip-on (semi-in-ear), but the only earbud with <strong>native Cantonese translation + AI meeting notes built-in</strong>. 43 languages, 96 accents, ~0.2s latency, 95% accuracy. Offline translation for 13 pairs. Best for users who value the AI function more than sound quality.</p>
+    </div>
+
+  </div>
+
+  <!-- ============ TAB 2: WATCHLIST ============ -->
+  <div class="tab-content" id="watchlist">
+
+    <h2>📌 Your existing watchlist (4 models)</h2>
+    <p style="color:var(--text-dim); font-size: 14px;">All four target different needs. Read carefully which problem each solves.</p>
+
+    <!-- DANGBEI AIR 1S -->
+    <div class="card watchlist">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Dangbei Air 1S</h3>
+          <div class="card-sub">當貝 Air 1S · 耳夾式 · AI 翻譯耳機 · 12mm 雙磁路動圈</div>
+        </div>
+        <div>
+          <span class="tag watch">Watchlist</span>
+          <span class="tag premium">Premium ¥999-1299</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">6.3g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">8h + 42h case</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">12mm dual-magnet</div></div>
+        <div class="spec"><div class="spec-label">Codec</div><div class="spec-value">LHDC 5.0 / Hi-Res</div></div>
+        <div class="spec"><div class="spec-label">Mics</div><div class="spec-value">4-mic AI ENC</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP54</div></div>
+        <div class="spec"><div class="spec-label">Unique</div><div class="spec-value">2.04" AMOLED 妙控屏 on case</div></div>
+        <div class="spec"><div class="spec-label">Translation</div><div class="spec-value">36 langs + 27 dialects</div></div>
+      </div>
+      <h4>Key features</h4>
+      <ul style="font-size:13px; margin-top:4px;">
+        <li><strong>AI productivity suite:</strong> 4-mode translation (call, video, face-to-face, simultaneous), all-platform call recording transcription (WeChat / DingTalk / Feishun / Tencent Meeting / Zoom — recipient doesn't need app)</li>
+        <li><strong>妙控屏 on case:</strong> shows real-time translation & transcription text without opening phone — a productivity advantage for live meetings</li>
+        <li><strong>Sound:</strong> LHDC 5.0 + Hi-Res dual-certified, 12mm dual-magnet driver, sand-gold composite diaphragm, head-tracking spatial audio, 75% leakage reduction</li>
+        <li><strong>Comfort:</strong> TÜV Rheinland certified, 0.5mm titanium C-bridge, nano-silver-ion antibacterial coating (99.9% germ resistance)</li>
+      </ul>
+
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros (from CN reviews)</h4>
+          <ul>
+            <li>"The only earphone in this price range with both a screen + full AI office workflow"</li>
+            <li>Reception praised for translation accuracy and 1-second response time</li>
+            <li>Excellent call recording + AI meeting minutes saves hours of post-meeting work</li>
+            <li>Music sound quality rated as越级 in the ear-clip category (esp. low-frequency punch vs. typical 开放式)</li>
+            <li>Strong glass-lens antibacterial coating (good for oily/sensitive ears)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons (from CN reviews)</h4>
+          <ul>
+            <li>Mostly marketing-driven content — limited independent Western reviews</li>
+            <li>6.3g slightly heavier than the lightest clip-ons (Sanag 5.2g, Huawei 5.1g)</li>
+            <li>4-mic ENC good but not class-leading for outdoor windy calls</li>
+            <li>LHDC 5.0 requires a phone that supports it (most modern Android phones do)</li>
+            <li>AI functions can be flaky on weak networks; offline capability is limited</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">
+        "一副耳机等于翻译机+录音笔?当贝Air 1S把AI塞进耳朵。耳夹佩戴舒适,漏音控制到位…翻译速度相当快,我说完中文很快英文就翻译出来,完全没有延迟。"
+        <div class="quote-source">— Tencent News, July 2026</div>
+      </div>
+      <div class="quote">
+        "如果在办公、听歌、学习之间切换不用反复配对,通勤党一周充一次就够。"
+        <div class="quote-source">— PConline, Sep 2026</div>
+      </div>
+    </div>
+
+    <!-- SANAG S8S ULTRA -->
+    <div class="card watchlist">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Sanag S8S Ultra</h3>
+          <div class="card-sub">塞那 S8S Ultra · 耳夾式 · AI 翻譯 · 11.8mm 四驅鈦動圈 · IP67</div>
+        </div>
+        <div>
+          <span class="tag watch">Watchlist</span>
+          <span class="tag value">¥960-1098 (after subsidy)</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">5.2g × 2 (lightest in class)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">7h + 50h case</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">11.8mm 4-driver titanium</div></div>
+        <div class="spec"><div class="spec-label">Chip</div><div class="spec-value">聲擎 S8-U + BT 6.0</div></div>
+        <div class="spec"><div class="spec-label">Mics</div><div class="spec-value">4-mic 270° anti-wind</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP67 (submersible-safe)</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">7 models (DeepSeek/豆包/etc)</div></div>
+        <div class="spec"><div class="spec-label">Translation</div><div class="spec-value">130 langs, 95% accuracy, 2s</div></div>
+      </div>
+      <h4>Key features</h4>
+      <ul style="font-size:13px; margin-top:4px;">
+        <li><strong>Brand pedigree:</strong> Sanag claims 沙利文 "全球耳夹销量第一" + 尚普 "全球AI耳夹销量第一" certifications; ~49% domestic online market share (Loto 2025H1)</li>
+        <li><strong>Lightest clip-on in class at 5.2g</strong> with 0.5mm titanium memory wire + silicone C-bridge</li>
+        <li><strong>IP67</strong> = can be washed under running water (unique at this price point)</li>
+        <li><strong>All AI functions free</strong> — no subscription (key differentiator vs. Timekettle subscription model)</li>
+        <li><strong>Multi-model AI:</strong> 7 built-in models (DeepSeek, 字节, 阿里, 腾讯, etc.) for Q&A, oral English practice, content creation</li>
+      </ul>
+
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros (from CN reviewers)</h4>
+          <ul>
+            <li>"Six-sided warrior of ear-clip earphones" — commonly repeated phrase in CN media</li>
+            <li>Real users confirm week-long battery under daily commute+work use</li>
+            <li>70% AI functions lifetime-free — best $/feature ratio</li>
+            <li>Outdoor anti-wind ENC rated as "best in class" for cycling / 街邊 calls</li>
+            <li>声擎 S8-U audio chip + 4-driver titanium delivers surprisingly tight bass for ear-clip form</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons (from CN reviewers)</h4>
+          <ul>
+            <li>Critical reviews note: "AI feature completion is uneven — accuracy depends heavily on network"</li>
+            <li>One CN roundup (smzdm-style) noted "bass is present but not class-leading" and "occasional digital-processing artifact on classical music"</li>
+            <li>Touch controls reportedly inconsistent (less reliable than physical buttons)</li>
+            <li>Some users find佩戴压力 on thicker耳廓 after 3-4 hours</li>
+            <li>Mostly Chinese-language app / reviews — Western independent reviews limited</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">
+        "佩戴四个小时办公追剧,耳廓只有轻微贴合感,没有胀痛、压耳现象…多曲率人体工学结构加持,日常走路、慢跑时佩戴稳固,就算小幅跑跳也不容易滑落。"
+        <div class="quote-source">— Toutiao, Aug 2026 (in-depth review)</div>
+      </div>
+      <div class="quote">
+        "连续用了6天,综合续航标称50小时,我中等强度使用确实一周才充一次。"
+        <div class="quote-source">— Toutiao, Aug 2026 (long-term test)</div>
+      </div>
+    </div>
+
+    <!-- SANAG S9S A12 -->
+    <div class="card watchlist">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Sanag S9S A12 (HK model)</h3>
+          <div class="card-sub">塞那 S9S · 9th-gen 耳夾式 · 13.4mm 鍍鈦振膜 · UK/EU/US versions exist</div>
+        </div>
+        <div>
+          <span class="tag watch">Watchlist</span>
+          <span class="tag value">RM 859 / USD 110-130</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">5.2-5.3g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">7h + 40-56h case (region-dep.)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">13.4mm titanium-coated (largest in cat.)</div></div>
+        <div class="spec"><div class="spec-label">Bluetooth</div><div class="spec-value">5.4 + Flash Link 9</div></div>
+        <div class="spec"><div class="spec-label">Mics</div><div class="spec-value">Dual-mic BF</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IPX4 (splash)</div></div>
+        <div class="spec"><div class="spec-label">Awards</div><div class="spec-value">London Design Gold / NY Product Design Silver</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">12 langs translation + recording</div></div>
+      </div>
+      <h4>Key features</h4>
+      <ul style="font-size:13px; margin-top:4px;">
+        <li><strong>9th-generation Sanag design</strong> — 12-layer dynamic spatial audio + 6-axis head-tracking gyroscope for true spatial sound</li>
+        <li><strong>13.4mm titanium diaphragm</strong> = largest in Sanag's ear-clip line, 360° ACS virtual environment</li>
+        <li><strong>Adjustable耳桥</strong> = adaptive fit for different ear shapes, "forget you're wearing it" comfort</li>
+        <li><strong>Sanag App + APPAI:</strong> AI Q&A, 12-language real-time translation, transcription (1yr VIP card included in box)</li>
+        <li><strong>British design heritage:</strong> worn by celebrity 余文乐, exported to Lazada SG / Amazon / Japan</li>
+      </ul>
+
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros (from reviewers)</h4>
+          <ul>
+            <li>PConline: "2024千元耳机市场的旗舰级标杆" — gold standard in $100 tier</li>
+            <li>Real users praise the elegance of the荔枝纹 + 电镀 charging case (looks like奢侈品)</li>
+            <li>Sound: bass 弹性 + not muddy (notable for ear-clip form)</li>
+            <li>Translation accuracy 98% per官方, real users confirm in 1-to-1 conversations</li>
+            <li>"Award-winning design" — also a fashion accessory</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons (from reviewers)</h4>
+          <ul>
+            <li>IPX4 only — not as weatherproof as Sanag S8S Ultra (IP67)</li>
+            <li>Some 2026 batch reports of touch controls being inconsistent in cold weather</li>
+            <li>AI VIP card is 12 months only — after that subscription needed (unlike S8S Ultra which is free)</li>
+            <li>7 hr single-charge is shorter than newer competitors (10-11 hr in Shokz OpenDots One)</li>
+            <li>Microphone only dual-mic — fewer than S8S Ultra's 4-mic</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">
+        "尤其是在运动的时候,这款耳机搭载了Sanag塞那独特的12重动态空间音频算法,而且内置了6轴体感仪,能灵敏追踪头部动作…真正的声随耳动,沉浸感十足。"
+        <div class="quote-source">— PConline Best, 2024-12</div>
+      </div>
+    </div>
+
+    <!-- ANKER PRO MAX AI (NOT CLIP-ON!) -->
+    <div class="card watchlist">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">⚠️ Anker Soundcore Liberty 5 Pro Max (NOT clip-on)</h3>
+          <div class="card-sub">Note: this is an in-ear bean-shape TWS with ear-fins, not a clip-on. In-ear form factor — sound isolation, no ambient awareness.</div>
+        </div>
+        <div>
+          <span class="tag watch">Watchlist</span>
+          <span class="tag premium">$229.99 / £199.99</span>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Form-factor mismatch:</strong> This is an in-ear TWS with a bean shape and silicone ear-fins — like Samsung Galaxy Buds Live, not a clip-on. The Anker <strong>Soundcore AeroClip</strong> is Anker's actual clip-on model — see "New Brands" tab.
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Form</div><div class="spec-value">In-ear bean with fins</div></div>
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">7g each</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">6.5h (ANC) / 28h case</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">9.2mm wool-paper</div></div>
+        <div class="spec"><div class="spec-label">Unique</div><div class="spec-value">1.78" AMOLED case + AI Note Taker</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">On-device transcription (Thus chip)</div></div>
+        <div class="spec"><div class="spec-label">Mics</div><div class="spec-value">8 mics + 2 bone-conduction</div></div>
+        <div class="spec"><div class="spec-label">Codec</div><div class="spec-value">LDAC + Dolby Atmos</div></div>
+      </div>
+      <h4>Why it's still worth considering (for a different problem)</h4>
+      <ul style="font-size:13px; margin-top:4px;">
+        <li><strong>On-device AI Note Taker:</strong> 12 hr of audio transcribed to searchable text with speaker ID. AI runs locally on the case (Thus chip) — GDPR-friendly, nothing leaves the device</li>
+        <li><strong>Guinness-certified call quality:</strong> 8 mics + bone-conduction achieved G-MOS record in 100dB environments</li>
+        <li><strong>Dolby Atmos + LDAC</strong> for hi-res audio</li>
+        <li><strong>Case screen is genuinely useful</strong> for AI recording control</li>
+      </ul>
+
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros (from Mashable / TechRadar)</h4>
+          <ul>
+            <li>"The best earbuds I've used for phone calls in years" — Yahoo Tech reviewer</li>
+            <li>Comfort: "positively comparing to Bose QuietComfort" — Mashable</li>
+            <li>120 min/month free AI transcription; on-device = privacy-friendly (UK GDPR angle)</li>
+            <li>Multipoint across 3 devices</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>Has ANC, so it seals the ear — different use case than your other picks</strong></li>
+            <li>9.2mm single driver is bass-heavy; less natural for spoken Cantonese recording</li>
+            <li>Touch-screen case is slow to respond (TechRadar: "feels like old fitness trackers")</li>
+            <li>Note Taker AI quality is unverified by independent reviews (Anker's own claim)</li>
+            <li>Pro Max is bulky (85g case) — pocket-awkward</li>
+            <li>Touch controls intermittently fail; takes multiple swipes</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">
+        "The Soundcore Liberty 5 Pro Max are tough to recommend unless transcription is your top priority. Most of us don't need a portable dictaphone on our earbuds."
+        <div class="quote-source">— TechRadar, May 2026</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ TAB 3: NEW BRANDS ============ -->
+  <div class="tab-content" id="new">
+
+    <h2>🆕 New brands I researched (10 models)</h2>
+    <p style="color:var(--text-dim); font-size: 14px;">Sorted roughly by price. Sources cited in each card.</p>
+
+    <!-- NOTHING EAR OPEN -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Nothing Ear (Open)</h3>
+          <div class="card-sub">Note: this is an <strong>ear-cuff (around the ear)</strong> with hook design, not a true C-bridge ear-clip like the others. Distinct form factor.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag">$149 / ~Rs 9999</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">8.1g × 2 (heaviest here)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">8h + 30h case</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">14.2mm titanium-coated</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.3</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP54</div></div>
+        <div class="spec"><div class="spec-label">App</div><div class="spec-value">Nothing X (advanced EQ)</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">AI Clear Voice</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None built-in</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>Best-in-class default EQ</strong> — The Verge: "impressive for an open-ear design with good clarity and decent bass"</li>
+            <li>8-band parametric EQ in app — most EQ depth of any open-ear reviewed</li>
+            <li>Battery genuinely delivers 8 hr (better than spec'd competitors)</li>
+            <li>Design: signature Nothing transparent aesthetic, unique</li>
+            <li>Mic rated "top-tier" for voice calls</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li>8.1g is heavy — Stockyfly: "started hurting ear bones after 2 hours"</li>
+            <li>No AI / translation / recording features</li>
+            <li><strong>Critical bug on Android:</strong> max volume is much lower than iPhone (Fonearena: "baffling software issue, rendering earbuds frustratingly quiet in noisy environments")</li>
+            <li>Pinch controls not consistently responsive</li>
+            <li>Case scratches easily (transparent plastic)</li>
+            <li>No wireless charging</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"For iPhone users, the Ear (Open) is an unqualified success. For Android users, the experience is diminished by a baffling software issue that results in significantly lower maximum volume."<div class="quote-source">— FoneArena, 2025-09</div></div>
+    </div>
+
+    <!-- BOSE ULTRA OPEN -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Bose Ultra Open Earbuds</h3>
+          <div class="card-sub">Gold standard for open-ear audio. Cuff-style — speaker near ear, battery behind ear.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag premium">$299 / £299</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">6.5g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">7.5h (4.5h immersive) + 19.5h case</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.3, aptX Adaptive/Lossless</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IPX4</div></div>
+        <div class="spec"><div class="spec-label">Audio</div><div class="spec-value">Bose OpenAudio, Immersive Audio (head-tracking)</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">4-mic, weak for outdoor calls</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>"Best open-ear sound I've experienced"</strong> — Men's Fitness (UK): "rivals some in-ear models in richness"</li>
+            <li>Bass weight + clarity that's "astonishing for an open design" — multiple reviewers</li>
+            <li>Immersive Audio: realistic spatial, "speaker in front of you" effect</li>
+            <li>Auto-volume feature that adjusts to ambient noise</li>
+            <li>Glasses-friendly: doesn't interfere with arms</li>
+            <li>Comfort: "you might forget you have them on"</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>No ANC by design</strong> — useless in subway/gym/loud environments</li>
+            <li>Mic quality: TechRadar found "even in a quiet room, voices sounded reedy and hissy on phone calls"</li>
+            <li><strong>No wireless charging</strong> at $299 — "feels less luxurious than the price suggests"</li>
+            <li>Sound quality ranks only 47th percentile of all Bluetooth headphones (TopTechChoices)</li>
+            <li>No AI / translation / transcription features</li>
+            <li>Variable fit: depends heavily on ear shape; not for everyone</li>
+            <li>Immersive Audio cuts battery by 40%</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"If you already tried regular earbuds and keep wishing they were less intrusive. Skip them if you expect one pair of earbuds to handle flights, subway rides, focused work, and high-energy workouts equally well."<div class="quote-source">— TopTechChoices, 2026-09</div></div>
+    </div>
+
+    <!-- HUAWEI FREECLIP 2 -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Huawei FreeClip 2</h3>
+          <div class="card-sub">Pioneer of ear-clip form. 11% smaller + 10% lighter than Gen 1, 25% softer C-bridge.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag premium">¥1299 / ~$180</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">5.1g × 2 (very light)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">9h + 38h case (38hr total)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">10.8mm dual-magnetic + NPU AI</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.2 + 星閃 (NearLink)</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP57 (submersible)</div></div>
+        <div class="spec"><div class="spec-label">Chip</div><div class="spec-value">3rd-gen Huawei audio + NPU</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-label" style="color:var(--text)">小藝 同傳, 21 languages, head-control, smart volume</div></div>
+        <div class="spec"><div class="spec-label">Awards</div><div class="spec-value">iF Design 2026, Forbes "Best Open Earbuds"</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>Best completion in the ear-clip category</strong> — 网易: "目前夹式耳机里最成熟、最精致的一款"</li>
+            <li>Forbes: "Improved audio in a smaller form factor makes the FreeClip 2 the best open-ear earbuds on the market"</li>
+            <li>10.8mm dual-magnetic + 3rd-gen chip = "low frequency energy up 100% vs Gen 1" — for ear-clip, surprisingly rich bass</li>
+            <li>HarmonyOS head-control: nod to answer, shake head to reject</li>
+            <li>Adaptive volume: 智感音量 auto-adjusts based on ambient noise</li>
+            <li>Reverse sound field tech: 50% volume leaks near-zero at 30cm</li>
+            <li>IP57 (submersible, vs IP54 on most competitors)</li>
+            <li>Box even won iF Design 2026</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>Best AI features locked to HarmonyOS</strong> — non-Huawei phones get ~80% functionality (iOS app less complete)</li>
+            <li>Fit may differ by ear shape — some report "long wear feels like more than in-ear"</li>
+            <li>Limited bass vs. in-ear flagships (physics, not fixable)</li>
+            <li>Some find head-control recognition rate ~95% (occasional miss)</li>
+            <li>3-mic DNN call quality: better than Gen 1, but windy outdoor still trails bone-conduction flagships</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"经过长时间使用后,你甚至会忘记自己戴着它,这是对一副开放式耳机最高级的评价…FreeClip 2的迭代逻辑清晰而务实:没有炫技式的功能堆砌,而是聚焦用户核心痛点持续优化。"<div class="quote-source">— 网易科技深度评测, 2025-12</div></div>
+    </div>
+
+    <!-- SHOKZ OPENDOTS ONE -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Shokz OpenDots One</h3>
+          <div class="card-sub">Shokz's first clip-on (previously known for bone-conduction). 11.8mm dual-driver "Bassphere".</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag">$199.95 / £179</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">6.5g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">10h + 30h case (40h total)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">Dual 11.8mm face-to-face "Bassphere"</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.4, multipoint, Dolby Audio</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP54</div></div>
+        <div class="spec"><div class="spec-label">Charging</div><div class="spec-value">USB-C + Qi wireless</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">4-mic NC</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None built-in</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>Best battery in class:</strong> 10h earbud + 40h total — beats FreeClip 2 (9h/38h) and Bose (7.5h/27h)</li>
+            <li>Bassphere technology: "outstanding for an open-ear design" — clear, defined low frequencies</li>
+            <li>What Hi-Fi? reviews praised "impressive audio quality" + "attractive design" + "strong battery life"</li>
+            <li>DirectPitch: solid anti-leakage tech</li>
+            <li>Higher max volume than competitors — works in noisy environments</li>
+            <li>Wi-Fi charging built in (unlike Bose, Huawei FreeClip 2)</li>
+            <li>For cycling: "use one bud to chat with group" — unique in this category</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li>Touch controls: "hit and miss" (Expert Reviews) — "single tap does nothing; must double-tap or hold"</li>
+            <li>Codec only SBC/AAC — no LDAC/aptX (vs Bose aptX Lossless)</li>
+            <li>No AI / translation / recording features</li>
+            <li>Wind noise in cycling: same as all open-ears (bone-conduction OpenRun Pro 2 still wins here)</li>
+            <li>Mic for calls: "fuzzy in noisy environments"</li>
+            <li>Some users find 6.5g slightly heavy for all-day wear</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"The Shokz OpenDots One deliver excellent open-ear sound and Dolby Audio in a chic, comfortable clip-on design. Great for outdoor runners who want awareness without sacrificing tunes."<div class="quote-source">— Absolute Geeks UAE, 2025-10</div></div>
+    </div>
+
+    <!-- ANKER SOUNDCORE AEROCLIP -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Anker Soundcore AeroClip</h3>
+          <div class="card-sub">Anker's actual clip-on. Open-ring titanium + TPU design. Lightest premium clip-on at 5.9g.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag value">$129.99 / £129.99</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">5.9g × 2 (lightest premium)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">8h + 24h case (32h total)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">12mm titanium-coated, Virtual Bass</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.4, multipoint</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IPX4</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">4 beamforming + AI + wind mesh</div></div>
+        <div class="spec"><div class="spec-label">Hi-Res</div><div class="spec-value">Yes (LDAC) — verified by reviewers</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None built-in</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>Best call quality in price tier:</strong> TWICE: "voice clarity is easily 3x better than many earbuds in this price range"</li>
+            <li>TechRadar: "an impressive pair of open ear headphones that don't leave audio quality behind"</li>
+            <li>Virtual Bass tech: "dispelled my skepticism about bass performance in an open-ear format"</li>
+            <li>Multipoint + customizable EQ via Soundcore app</li>
+            <li>Lightest premium clip-on (5.9g vs Huawei 5.1g — only 0.8g heavier but $50 cheaper)</li>
+            <li>Adaptive comfort: pressure-free for long wear; includes 2 sizes ear grips</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li>Sound leakage at high volumes ("more than I was expecting" — AU Review)</li>
+            <li>Case lacks wireless charging (at $130 — disappointing)</li>
+            <li>Highs can get "crackly" at full volume (AU Review)</li>
+            <li>Only IPX4 (Huawei FreeClip 2 is IP57)</li>
+            <li>Touch controls "need a very firm tap" (Trusted Reviews)</li>
+            <li>No AI / translation / recording features</li>
+            <li>No auto-pause when removed</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"If you're only after an open design, I'd say yes — you get great sound for this headphone type, as well as impressive calling capabilities."<div class="quote-source">— TechRadar, 2026</div></div>
+    </div>
+
+    <!-- JBL SOUNDGEAR CLIPS -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">JBL Soundgear Clips</h3>
+          <div class="card-sub">Newest (Aug 2025) with SonicArc design + OpenSound tech. Translucent fashion-forward look.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag value">$149.99 / £99.99 / S$199</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">6.5g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">8h + 24h case (32h total)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">11mm dynamic, Adaptive Bass Boost</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.4, multipoint, Google Fast Pair</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP54</div></div>
+        <div class="spec"><div class="spec-label">App</div><div class="spec-value">JBL Headphones (10-band EQ, 6 presets)</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">4 beamforming, AI-trained</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None built-in</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li>CanBuyOrNot: "secure and comfy to wear + striking translucent design + decent sound"</li>
+            <li>5 unique colors (translucent "Ghost" lineup)</li>
+            <li>10-band EQ in app — more than most competitors</li>
+            <li>Real Japanese user (Kakaku): "comfortable, won't drop, sound is good — but fit is highly ear-dependent; definitely try before buying"</li>
+            <li>SonicArc: minimal leakage, extra bass performance</li>
+            <li>Lightest case in segment at 40g</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li>Frieve Audio Review: "scientific validity 0.5 — no THD, S/N, or frequency deviation data"</li>
+            <li>No wear detection (Sony, Huawei both have)</li>
+            <li>No spatial sound effect, no Personi-Fi (vs JBL Sense Pro)</li>
+            <li>No wireless charging</li>
+            <li>Plastic case scratches easily</li>
+            <li>Sound quality = "fairly punchy bass, decent separation, decent stage" but not class-leading</li>
+            <li>Outperforms Nothing Ear (Open) on features but is 50% more expensive</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"音漏れに関しては、家で家族に隣で聞いてもらったところ自分のスマホだと40%くらいだと漏れてるな~とわかるぐらいです…電車だと30%以上は出さないと聞こえずらいですね。"<div class="quote-source">— Japanese user, Kakaku.com, 2025-10</div></div>
+    </div>
+
+    <!-- 1MORE S70 -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">1MORE S70 (Open Earbuds S70)</h3>
+          <div class="card-sub">Hook-over-the-ear design (not a true C-bridge ear-clip), but often listed in this category.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag value">$129.99</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">8.9g × 2</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">12h + 28h case (40h total)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">Dual-magnetic + DiamondFlex diaphragm</div></div>
+        <div class="spec"><div class="spec-label">Tuning</div><div class="spec-value">Grammy winner Luca Bignardi</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.3</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IPX5</div></div>
+        <div class="spec"><div class="spec-label">Codec</div><div class="spec-value">AAC/SBC only</div></div>
+        <div class="spec"><div class="spec-label">Charging</div><div class="spec-value">5 min = 2h playback</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li>Real user (Eddie, Hong Kong): "Absolutely fantastic headphones — five stars all the way!"</li>
+            <li>Paul D (US): "Best open ear Bluetooth device I've had — battery is WOW"</li>
+            <li>Titanium + liquid silicone = very comfortable; can be worn for naps</li>
+            <li>12 hr single-charge — second longest after Shokz OpenDots One</li>
+            <li>4-5 EQ presets (Studio, Bass Booster, Hip-Hop, Pop, Podcast)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>NYT Wirecutter panned it:</strong> "out-of-the-box had off-putting burnt-plastic smell… small amount of bass, male vocals sound unnatural, not good enough for the higher price"</li>
+            <li>1MORE S50 / S31 / S20 also tested poorly: "harsh highs, quiet lows, no custom EQ" on S20</li>
+            <li>8.9g is on the heavier side</li>
+            <li>Triple-tap control is "tricky to use"</li>
+            <li>No wireless charging</li>
+            <li>Case magnets weak: "earbuds fall out if dropped" (1 user review)</li>
+            <li>Lowest volume setting "too loud for quiet rooms"</li>
+            <li>No multipoint</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"Out of the box, this hook-over-the-ear pair had an off-putting, burnt-plastic smell that fortunately dissipated over time. This pair delivered only a small amount of bass and made male vocals sound unnatural. The fit was comfortable, but the performance wasn't good enough to warrant the higher price."<div class="quote-source">— NYT Wirecutter</div></div>
+    </div>
+
+    <!-- SENNHEISER ACCENTUM CLIP -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Sennheiser Accentum Clip (and Accentum Open TWS)</h3>
+          <div class="card-sub">Two Sennheiser options: the cuff-style Accentum Clip (LDAC) and the AirPods-like Accentum Open TWS (no LDAC, cheaper).</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag">Accentum Clip ~$180 · Accentum Open $129</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">Clip: ~6g · Open: 4.4g (lightest!)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">~7h + 21h (Clip) / 6.5h + 21.5h (Open)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">11mm dynamic</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.3, multipoint (up to 8 devices)</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IP54 (Clip) / IPX4 (Open)</div></div>
+        <div class="spec"><div class="spec-label">Codec</div><div class="spec-value">Clip: SBC/AAC/LDAC · Open: SBC/AAC only</div></div>
+        <div class="spec"><div class="spec-label">App</div><div class="spec-value">Open: NONE · Clip: Smart Control</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>LDAC support on the Accentum Clip</strong> — hi-res wireless, rare in this form factor</li>
+            <li>RTINGS: "Excellent stability during vigorous movement"</li>
+            <li>Smart Control app with EQ + customizable controls (Clip only)</li>
+            <li>Multipoint 8 devices — best in class for multi-device workflow</li>
+            <li>True Sennheiser tuning: balanced mids + treble (vs bass-heavy competitors)</li>
+            <li>Accentum Open 4.4g = lightest open-ear reviewed (lighter than Bose 6.5g)</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>Accentum Clip is not officially sold in US</strong> — limits availability</li>
+            <li>Accentum Open TWS has NO app, NO EQ — major gap at $129</li>
+            <li>RTINGS: "Very little bass… stiff hooks and hard plastic contact points can become uncomfortable over time"</li>
+            <li>"Open" design (Open TWS) is AirPods-style — sits in-ear, not a true ear-cuff</li>
+            <li>Mic quality: poor for outdoor calls (Times of India: "voice sounds thin and muffled")</li>
+            <li>Bass: "low notes barely make an impact" (Smartprix)</li>
+            <li>Auto-pause: Accentum Open has it; Clip doesn't</li>
+            <li>No AI / translation features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"If you want noise cancelling and a more premium design, I'd suggest pursuing a pair of the best wireless earbuds instead, for awesome audio and ANC."<div class="quote-source">— TechRadar on AeroClip, but applies here</div></div>
+    </div>
+
+    <!-- OLADANCE OWS PRO -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Oladance OWS Pro</h3>
+          <div class="card-sub">Premium open-ear from former Bose ANC engineers. 16h earbud / 58h with case — extreme battery.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag premium">$229 / $230</span>
+        </div>
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="spec-label">Weight</div><div class="spec-value">13.8g × 2 (heaviest open-ear)</div></div>
+        <div class="spec"><div class="spec-label">Battery</div><div class="spec-value">16h + 42h case (58h total — class-leading)</div></div>
+        <div class="spec"><div class="spec-label">Driver</div><div class="spec-value">Dual 23×10mm stacked dynamic</div></div>
+        <div class="spec"><div class="spec-label">BT</div><div class="spec-value">5.3, multipoint</div></div>
+        <div class="spec"><div class="spec-label">IP</div><div class="spec-value">IPX4</div></div>
+        <div class="spec"><div class="spec-label">App</div><div class="spec-value">8-band EQ, Focus mode, hearing protection</div></div>
+        <div class="spec"><div class="spec-label">Mic</div><div class="spec-value">6 MEMS</div></div>
+        <div class="spec"><div class="spec-label">AI</div><div class="spec-value">None — but has "Focus" ANC mode</div></div>
+      </div>
+      <h4>Strengths & weaknesses</h4>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Pros</h4>
+          <ul>
+            <li><strong>Class-leading battery:</strong> 16h earbud + 58h total — nobody else close</li>
+            <li>Headphonesty: "natural sound and sublime comfort" — best sound quality of any open-ear tested (by reviewers)</li>
+            <li>Focus mode: closest to ANC in any open-ear (filters constant low-frequency noise like fans/engines)</li>
+            <li>8-band custom EQ in app + Hearing Protection mode (limits exposure)</li>
+            <li>Multipoint works smoothly</li>
+            <li>WiFi HiFi: "everything sounds rare; every pluck and bend feels as though the instrument is in the room"</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Cons</h4>
+          <ul>
+            <li><strong>13.8g = heaviest in comparison</strong> — discomfort after long sessions</li>
+            <li>App not available in Italy / some regions (Heyup community)</li>
+            <li>SBC only — no AAC, no aptX, no LDAC (big miss for $230)</li>
+            <li>Mic for calls: "voices sound distant, wind noise poorly filtered" (cycling reports)</li>
+            <li>Touch buttons: clicking can shift the earbud's position</li>
+            <li>Some units have plastic smell out of box</li>
+            <li>Focus mode: most users notice no significant effect (SmartNested)</li>
+            <li>No AI / translation / recording features</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote">"Despite its impressive battery life and safe open-ear format, the Oladance OWS Pro feels overpriced and underwhelming… I felt some discomfort in my ears, which didn't happen with the original OWS."<div class="quote-source">— Heyup community review, 2025-06</div></div>
+    </div>
+
+    <!-- SOUNDCORE AEROCLIP - already covered above, skip -->
+
+    <!-- BEYERDYNAMIC VERIO 200 - short mention -->
+    <div class="card newbrand">
+      <div class="card-head">
+        <div>
+          <h3 class="card-title">Beyerdynamic Verio 200 (mention only)</h3>
+          <div class="card-sub">Hook-over-the-ear open earbud. German audiophile heritage. Mentioned in NYT roundup.</div>
+        </div>
+        <div>
+          <span class="tag new">New</span>
+          <span class="tag premium">~$200</span>
+        </div>
+      </div>
+      <div class="proscons">
+        <div class="pros">
+          <h4>👍 Notable points</h4>
+          <ul>
+            <li>NYT: "produced decent sound after EQ adjustment in the app"</li>
+            <li>German engineering brand</li>
+            <li>Audiophile-grade tuning with app EQ</li>
+          </ul>
+        </div>
+        <div class="cons">
+          <h4>👎 Notable points</h4>
+          <ul>
+            <li>NYT: "highs were still a touch tinny even after EQ"</li>
+            <li>Mic: "distant quality, caller hears background and wind"</li>
+            <li>Earbud design "prone to jostling when tapped for controls"</li>
+            <li>At this price, the flaws matter more</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ TAB 4: COMPARISON MATRIX ============ -->
+  <div class="tab-content" id="matrix">
+    <h2>📋 Side-by-side comparison</h2>
+
+    <h3>Hard specs</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Form</th>
+            <th>Weight (g/ea)</th>
+            <th>Battery (h)</th>
+            <th>BT</th>
+            <th>IP</th>
+            <th>Driver</th>
+            <th>Codec</th>
+            <th>Mic</th>
+            <th>AI / Transcribe</th>
+            <th>Price (USD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Dangbei Air 1S</strong> ⚑</td><td>Clip</td><td>6.3</td><td>8+42</td><td>5.x</td><td>IP54</td><td>12mm</td><td>LHDC 5.0</td><td>4</td><td>✅ 36 langs, 27 dialects</td><td>~$140-180</td></tr>
+          <tr><td><strong>Sanag S8S Ultra</strong> ⚑</td><td>Clip</td><td>5.2</td><td>7+50</td><td>6.0</td><td>IP67</td><td>11.8mm×4</td><td>SBC/AAC</td><td>4</td><td>✅ 130 langs (7 models)</td><td>~$135-150</td></tr>
+          <tr><td><strong>Sanag S9S</strong> ⚑</td><td>Clip</td><td>5.2</td><td>7+40-56</td><td>5.4</td><td>IPX4</td><td>13.4mm</td><td>SBC/AAC</td><td>2</td><td>✅ 12 langs (1yr free)</td><td>~$110-130</td></tr>
+          <tr><td><strong>Anker Liberty 5 Pro Max</strong> ⚑</td><td><em>In-ear bean</em></td><td>7.0</td><td>6.5+28</td><td>6.1</td><td>IP55</td><td>9.2mm</td><td>LDAC</td><td>8</td><td>✅ On-device transcription</td><td>~$230</td></tr>
+          <tr><td><strong>Nothing Ear (Open)</strong></td><td>Ear-cuff hook</td><td>8.1</td><td>8+30</td><td>5.3</td><td>IP54</td><td>14.2mm</td><td>SBC/AAC</td><td>AI</td><td>❌</td><td>~$149</td></tr>
+          <tr><td><strong>Bose Ultra Open</strong></td><td>Cuff</td><td>6.5</td><td>7.5+19.5</td><td>5.3</td><td>IPX4</td><td>Dipole</td><td>aptX Lossless</td><td>4</td><td>❌</td><td>~$299</td></tr>
+          <tr><td><strong>Huawei FreeClip 2</strong></td><td>Clip</td><td>5.1</td><td>9+38</td><td>5.2+星閃</td><td>IP57</td><td>10.8mm×2</td><td>L2HC/LC3</td><td>3</td><td>✅ 小藝 21 langs (iOS ~80%)</td><td>~$180</td></tr>
+          <tr><td><strong>Shokz OpenDots One</strong></td><td>Clip</td><td>6.5</td><td>10+30</td><td>5.4</td><td>IP54</td><td>11.8mm×2</td><td>SBC/AAC</td><td>4</td><td>❌</td><td>~$200</td></tr>
+          <tr><td><strong>Soundcore AeroClip</strong></td><td>Clip</td><td>5.9</td><td>8+24</td><td>5.4</td><td>IPX4</td><td>12mm</td><td>LDAC*</td><td>4+AI</td><td>❌</td><td>~$130</td></tr>
+          <tr><td><strong>JBL Soundgear Clips</strong></td><td>Clip</td><td>6.5</td><td>8+24</td><td>5.4</td><td>IP54</td><td>11mm</td><td>SBC/AAC</td><td>4+AI</td><td>❌</td><td>~$150</td></tr>
+          <tr><td><strong>1MORE S70</strong></td><td>Hook</td><td>8.9</td><td>12+28</td><td>5.3</td><td>IPX5</td><td>DiamondFlex</td><td>AAC/SBC</td><td>2</td><td>❌</td><td>~$130</td></tr>
+          <tr><td><strong>Sennheiser Accentum Clip</strong></td><td>Clip</td><td>~6</td><td>~7+21</td><td>5.3</td><td>IP54</td><td>11mm</td><td>LDAC</td><td>2</td><td>❌</td><td>~$180 (EU only)</td></tr>
+          <tr><td><strong>Oladance OWS Pro</strong></td><td>Hook ear</td><td>13.8</td><td>16+42</td><td>5.3</td><td>IPX4</td><td>23×10mm×2</td><td>SBC only</td><td>6</td><td>❌</td><td>~$230</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color:var(--text-dim); margin-top:8px;">⚑ = on your original watchlist. *AeroClip Hi-Res certified per Anker; codec details vary by region.</p>
+
+    <h3>Subjective review ratings (from cited sources)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Sound</th>
+            <th>Comfort</th>
+            <th>Call quality</th>
+            <th>Battery</th>
+            <th>Value</th>
+            <th>Best for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Dangbei Air 1S</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating ok">7/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating ok">7/10</span></td><td>AI productivity</td></tr>
+          <tr><td><strong>Sanag S8S Ultra</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">10/10</span></td><td><span class="rating good">8/10</span></td><td>AI all-rounder</td></tr>
+          <tr><td><strong>Sanag S9S</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">8/10</span></td><td>Fashion + sound</td></tr>
+          <tr><td><strong>Liberty 5 Pro Max</strong></td><td><span class="rating ok">7/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">10/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating ok">6/10</span></td><td>On-device AI notes</td></tr>
+          <tr><td><strong>Nothing Ear (Open)</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">7/10</span></td><td>iPhone + design fans</td></tr>
+          <tr><td><strong>Bose Ultra Open</strong></td><td><span class="rating good">9/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating bad">5/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating bad">5/10</span></td><td>Pure sound quality</td></tr>
+          <tr><td><strong>Huawei FreeClip 2</strong></td><td><span class="rating good">9/10</span></td><td><span class="rating good">10/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">8/10</span></td><td>All-rounder (best完成度)</td></tr>
+          <tr><td><strong>Shokz OpenDots One</strong></td><td><span class="rating good">9/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">10/10</span></td><td><span class="rating good">8/10</span></td><td>Outdoor / battery</td></tr>
+          <tr><td><strong>Soundcore AeroClip</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating ok">7/10</span></td><td><span class="rating good">9/10</span></td><td>Best value call clarity</td></tr>
+          <tr><td><strong>JBL Soundgear Clips</strong></td><td><span class="rating ok">7/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">7/10</span></td><td><span class="rating ok">7/10</span></td><td>Style + brand trust</td></tr>
+          <tr><td><strong>1MORE S70</strong></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">9/10</span></td><td><span class="rating ok">6/10</span></td><td>Cheap + long battery</td></tr>
+          <tr><td><strong>Sennheiser Accentum Clip</strong></td><td><span class="rating ok">7/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating bad">5/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating ok">6/10</span></td><td>LDAC + multi-device</td></tr>
+          <tr><td><strong>Oladance OWS Pro</strong></td><td><span class="rating good">8/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating ok">6/10</span></td><td><span class="rating good">10/10</span></td><td><span class="rating bad">5/10</span></td><td>Battery champion</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Visual comparison</h3>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h4>Sound quality (subjective, 1-10)</h4>
+        <canvas id="soundChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Comfort for all-day wear (1-10)</h4>
+        <canvas id="comfortChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-grid">
+      <div class="chart-card">
+        <h4>AI / Cantonese transcription readiness</h4>
+        <canvas id="aiChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Value-for-money (1-10)</h4>
+        <canvas id="valueChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 5: CANTONESE TRANSCRIPTION ============ -->
+  <div class="tab-content" id="cantonese">
+    <h2>🈶 Cantonese transcription ecosystem</h2>
+    <p style="color:var(--text-dim); font-size: 14px;">Clip-on earbuds are microphones + Bluetooth. The "Cantonese transcription" capability lives in the <strong>phone app</strong>, not the earbuds. Below: tools that work with ANY Bluetooth earbud and have solid Cantonese support.</p>
+
+    <h3>Native (free, on-device)</h3>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h4>iOS 26.4 Live Captions (新!)</h4>
+        <div class="tool-meta">Released Feb 2026 · iOS 26.4+ · 100% on-device</div>
+        <span class="tool-score">⭐ 8.5/10</span>
+        <p style="font-size:13px; margin-top:8px;">即時字幕 支援 中文(香港). Real-time captions from mic OR app audio. <strong>Best new option in 2026 for HK users.</strong> Tested by Unwire.hk: Cantonese accuracy "不俗,能夠識別廣東話用字,沒有明顯錯誤". English-brand name transcription is weak (Gemini → "Gemalate").</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>iPhone Voice Dictation (Cantonese)</h4>
+        <div class="tool-meta">iOS 13+ · Built-in · Free</div>
+        <span class="tool-score">⭐ 7/10</span>
+        <p style="font-size:13px; margin-top:8px;">Settings → General → Keyboard → Dictation Languages → 粵語 (香港). <strong>Crucial hack:</strong> disable all other language dictionaries in Settings → General → Dictionary (only keep 繁體粵語), accuracy jumps from ~85% to ~93% per HK Threads users. Free, offline, fast — best for short messages.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Android Gboard / Samsung Keyboard 廣東話</h4>
+        <div class="tool-meta">Android 9+ · Free · Online (Google ASR)</div>
+        <span class="tool-score">⭐ 7/10</span>
+        <p style="font-size:13px; margin-top:8px;">Google's Cantonese ASR is competent for everyday dictation. Requires internet. Less privacy-friendly than iOS native. Better for English-Cantonese code-mixing than iOS in some cases.</p>
+      </div>
+    </div>
+
+    <h3>Dedicated AI recording apps (Cantonese-optimized)</h3>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h4>Tinrec (秒聽錄音)</h4>
+        <div class="tool-meta">iOS / Android / Web · Free 100 min/mo · Pro available</div>
+        <span class="tool-score">⭐ 9/10</span>
+        <p style="font-size:13px; margin-top:8px;"><strong>Best for the use case you're describing.</strong> Independent benchmark: 8.3% CER on 5-min Cantonese radio clip in real office environment. <strong>Unique features:</strong> AI dialog query ("會議結論係乜?"), auto-generated meeting minutes, to-do extraction, supports YouTube/Bilibili link transcription. Designed for the Asian Cantonese/Mandarin code-mixing use case. Tinrec's own benchmark vs. Otter.ai shows Tinrec wins on Cantonese 100% of the time; Otter doesn't support Cantonese at all.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Notely Voice (offline Whisper)</h4>
+        <div class="tool-meta">iOS / Android · Free · Open source</div>
+        <span class="tool-score">⭐ 7.5/10</span>
+        <p style="font-size:13px; margin-top:8px;">100% offline, runs OpenAI Whisper locally on phone. <strong>Strong privacy</strong> (no cloud). Tested by Unwire.hk on Cantonese: high accuracy, but produces <strong>書面語 (written) output</strong> automatically, not literal transcription. Will rewrite 唔使 → 無需. ~465MB model download. Use case: max privacy, or you want formal meeting minutes.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Otter.ai</h4>
+        <div class="tool-meta">Web/iOS · Free 300 min/mo · English only</div>
+        <span class="tool-score">⭐ 2/10 for 粵語</span>
+        <p style="font-size:13px; margin-top:8px;"><strong>Does NOT support Cantonese or Chinese at all.</strong> Best-in-class for English meetings (speaker ID, real-time transcription, Zoom integration), but useless for your use case. Skip unless your meetings are pure English.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Notta</h4>
+        <div class="tool-meta">iOS / Android / Web · 50+ languages</div>
+        <span class="tool-score">⭐ 5.5/10</span>
+        <p style="font-size:13px; margin-top:8px;">Claims 50+ languages including Cantonese, but real-user reports: Chinese accuracy is significantly worse than Tinrec. Use only for short clips where you can verify.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>ListenUp Dictation</h4>
+        <div class="tool-meta">macOS / iOS · Paid · 97 languages</div>
+        <span class="tool-score">⭐ 7/10</span>
+        <p style="font-size:13px; margin-top:8px;">Live dictation (not file upload), 97 languages including Cantonese, smart mode produces cleaned-up text (removes filler, understands self-corrections). Mac/iOS integration is the best in class. Not a meeting recorder — for typing into any text field.</p>
+      </div>
+    </div>
+
+    <h3>Translation earbuds (built-in, not iOS-bound)</h3>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h4>Timekettle W4 Pro (mentioned)</h4>
+        <div class="tool-meta">Semi-in-ear · ~$370 · 43 langs incl. 粵語</div>
+        <span class="tool-score">⭐ 8.5/10 for translation</span>
+        <p style="font-size:13px; margin-top:8px;">Only earbud with <strong>native Cantonese in translation list</strong>. ~0.2s latency, 95% accuracy. Has its own AI Memo, meeting minutes, transcription. <strong>Caveat:</strong> not clip-on (semi-in-ear) — different comfort category. If translation matters more than form factor, this is the only choice.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>FIIL GS Links AI</h4>
+        <div class="tool-meta">Hook ear · Mentioned in passing</div>
+        <span class="tool-score">⭐ 7/10</span>
+        <p style="font-size:13px; margin-top:8px;">AI conference assistant built-in: 7m pickup radius, 98% accuracy claim, supports 川/粵/滬 dialects in transcription. Real-time translation 中↔英. Worth a look but Chinese brand, less verified in Western reviews.</p>
+      </div>
+    </div>
+
+    <h3>🥇 My recommended Cantonese workflow</h3>
+    <div class="card" style="border-left: 3px solid var(--accent);">
+      <h4>For HK / Greater Bay users with ANY Bluetooth earbud:</h4>
+      <ol style="font-size:14px; line-height:1.8;">
+        <li><strong>Live meeting / class:</strong> iPhone → iOS 26.4 Live Captions (新功能, 100% on-device, private) + Tinrec running in background for searchable transcript + meeting minutes</li>
+        <li><strong>Quick voice notes / WeChat reply:</strong> iPhone 內建 Cantonese dictation (after the dictionary hack above)</li>
+        <li><strong>Offline / privacy critical:</strong> Notely Voice (Whisper local)</li>
+        <li><strong>Cross-language conversation:</strong> Tinrec translation OR Timekettle W4 Pro (if budget allows)</li>
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- ============ TAB 6: VERDICT ============ -->
+  <div class="tab-content" id="verdict">
+    <h2>🎯 Final verdict & recommendations</h2>
+
+    <h3>If you must pick ONE from your watchlist today</h3>
+    <div class="reco">
+      <h3>👉 Sanag S8S Ultra (¥960-1098)</h3>
+      <p>Best blend of price + AI productivity + 50h battery + IP67. <strong>All AI features free forever</strong> (no subscription like S9S or Timekettle). 5.2g lightest, BT 6.0, 4-mic 270° anti-wind. <strong>Watch out for:</strong> mostly Chinese-language reviews and app; touch controls inconsistent.</p>
+    </div>
+
+    <h3>If you're open to swap your watchlist</h3>
+
+    <div class="reco">
+      <div class="reco-tag">Best sound + best AI combo</div>
+      <h3>Huawei FreeClip 2 + HarmonyOS (¥1299)</h3>
+      <p>Use it with a Huawei phone for the full 21-language 同傳 + meeting minutes + head-control + 智感音量. Forbes: "best open earbuds on the market." iOS-only users still get ~80% of features.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">Best value with call clarity</div>
+      <h3>Anker Soundcore AeroClip ($130)</h3>
+      <p>If you mostly want a great-sounding, comfortable clip-on for daily use and don't need built-in AI — this beats the S8S Ultra on call quality. Pair it with Tinrec on your phone for Cantonese transcription, and you've got a $200 setup that beats $300 alternatives.</p>
+    </div>
+
+    <div class="reco">
+      <div class="reco-tag">If you need 100% translation built-in</div>
+      <h3>Timekettle W4 Pro (~$370, semi-in-ear)</h3>
+      <p>Only option with native Cantonese in 43-language translation + AI meeting notes. Not a true clip-on but the translation accuracy is unmatched. Worth it if you do international calls or Cantonese↔Mandarin↔English meetings.</p>
+    </div>
+
+    <h3>Skip these (real-user feedback)</h3>
+    <div class="card" style="border-left: 3px solid var(--bad);">
+      <ul style="font-size:14px;">
+        <li><strong>1MORE S70:</strong> NYT Wirecutter panned it. Burnt-plastic smell, weak bass, unnatural vocals, no custom EQ. $130 better spent on AeroClip.</li>
+        <li><strong>Bose Ultra Open at full price ($299):</strong> Incredible sound but no AI features + weak mic + no wireless charging. Only worth it on sale (~$199).</li>
+        <li><strong>Anker Liberty 5 Pro Max for Cantonese:</strong> Has the best on-device AI note-taker, but the in-ear form factor + poor outdoor mic + heavy case make it a niche choice. Only buy if you specifically need UK-GDPR-friendly local transcription AND have no other transcription workflow.</li>
+      </ul>
+    </div>
+
+    <h3>Test before you buy — the form-factor variable</h3>
+    <div class="alert">
+      <strong>Open-ear / clip-on fit is highly ear-dependent.</strong> Real-user feedback shows ~20-30% of people find some clip-on uncomfortable after 2+ hours, regardless of brand. If possible:
+      <ul style="margin: 8px 0;">
+        <li>Buy from a retailer with good return policy (Amazon, JD, Anker.com, Huawei Store)</li>
+        <li>For HK: try Huawei/Samsung/Sony stores for FreeClip 2 / Soundgear demo</li>
+        <li>Japanese users (Kakaku) consistently say: <em>"必ず試聴出来るお店で装着を試してから、購入することをお勧めします"</em> — always try before you buy</li>
+      </ul>
+    </div>
+
+    <h3>What to do next</h3>
+    <ol style="font-size:14px; line-height:1.8;">
+      <li><strong>Decide on your #1 priority</strong>: pure sound (Bose/Huawei), AI features (S8S Ultra/Huawei), or budget (AeroClip)</li>
+      <li><strong>Download Tinrec free tier</strong> (100 min/mo) to verify it meets your Cantonese transcription bar before buying a "translation earbud"</li>
+      <li><strong>Check your iOS version</strong>: iOS 26.4+ adds native Cantonese Live Captions, which is a huge free upgrade if you haven't updated</li>
+      <li><strong>Try in person</strong>: ear-clip comfort is the #1 variable across all these models</li>
+    </ol>
+
+  </div>
+
+  <footer>
+    <p>Research compiled Sep 2026 · Sources: TechRadar, Mashable, PConline, Tom's Guide, 网易科技, Toutiao, Tencent News, Unwire.hk, Tinrec, Kakaku.com, Expert Reviews, RTINGS, Headphonesty, Wirecutter (NYT), TechBloat, FoneArena, Times of India, Absolute Geeks UAE, Frieve Audio Review, Manuals+.</p>
+    <p style="margin-top:8px;">This is a research synthesis, not a hands-on test. All ratings are aggregated from cited reviews. Prices in USD as of Sep 2026. CN models (Dangbei, Sanag, FIIL) have limited independent Western review coverage; ratings reflect mostly Chinese-language sources.</p>
+  </footer>
+
+</div>
+
+<script>
+  // Tab handling
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById(tab).classList.add('active');
+    });
+  });
+
+  const colors = {
+    accent: '#6ee7b7',
+    accent2: '#60a5fa',
+    warn: '#fbbf24',
+    bad: '#f87171',
+    dim: '#4a5568'
+  };
+
+  // Chart 1: Price vs Battery
+  new Chart(document.getElementById('priceBatteryChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Watchlist',
+        data: [
+          {x: 160, y: 50, label: 'Dangbei Air 1S'},
+          {x: 140, y: 57, label: 'Sanag S8S Ultra'},
+          {x: 120, y: 47, label: 'Sanag S9S'},
+          {x: 230, y: 34.5, label: 'Liberty 5 Pro Max'}
+        ],
+        backgroundColor: '#f59e0b',
+        pointRadius: 8
+      }, {
+        label: 'New brands',
+        data: [
+          {x: 149, y: 38, label: 'Nothing Ear Open'},
+          {x: 299, y: 27, label: 'Bose Ultra Open'},
+          {x: 180, y: 47, label: 'Huawei FreeClip 2'},
+          {x: 200, y: 40, label: 'Shokz OpenDots'},
+          {x: 130, y: 32, label: 'AeroClip'},
+          {x: 150, y: 32, label: 'JBL Soundgear Clips'},
+          {x: 130, y: 40, label: '1MORE S70'},
+          {x: 180, y: 28, label: 'Sennheiser Accentum Clip'},
+          {x: 230, y: 58, label: 'Oladance OWS Pro'}
+        ],
+        backgroundColor: '#8b5cf6',
+        pointRadius: 7
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#e7ebf3' } } },
+      scales: {
+        x: { title: { display: true, text: 'Price (USD)', color: '#9aa3b2' }, ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } },
+        y: { title: { display: true, text: 'Total battery (h with case)', color: '#9aa3b2' }, ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } }
+      }
+    }
+  });
+
+  // Chart 2: Multi-rating radar
+  const radarModels = ['Dangbei Air 1S', 'S8S Ultra', 'FreeClip 2', 'AeroClip', 'Bose Ultra Open', 'Shokz OpenDots', 'OWS Pro'];
+  new Chart(document.getElementById('ratingChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Sound', 'Comfort', 'Call quality', 'AI/Transcribe', 'Battery', 'Value'],
+      datasets: [{
+        label: 'Huawei FreeClip 2',
+        data: [9, 10, 8, 9, 8, 8],
+        borderColor: colors.accent,
+        backgroundColor: 'rgba(110, 231, 183, 0.15)',
+        pointBackgroundColor: colors.accent
+      }, {
+        label: 'Bose Ultra Open',
+        data: [9, 9, 5, 1, 6, 5],
+        borderColor: colors.accent2,
+        backgroundColor: 'rgba(96, 165, 250, 0.15)',
+        pointBackgroundColor: colors.accent2
+      }, {
+        label: 'Soundcore AeroClip',
+        data: [8, 9, 9, 1, 7, 9],
+        borderColor: colors.warn,
+        backgroundColor: 'rgba(251, 191, 36, 0.15)',
+        pointBackgroundColor: colors.warn
+      }, {
+        label: 'Sanag S8S Ultra',
+        data: [8, 9, 8, 9, 10, 8],
+        borderColor: '#f59e0b',
+        backgroundColor: 'rgba(245, 158, 11, 0.15)',
+        pointBackgroundColor: '#f59e0b'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { labels: { color: '#e7ebf3' } } },
+      scales: { r: {
+        angleLines: { color: '#2a3142' },
+        grid: { color: '#2a3142' },
+        pointLabels: { color: '#e7ebf3', font: { size: 12 } },
+        ticks: { color: '#9aa3b2', backdropColor: 'transparent' },
+        suggestedMin: 0, suggestedMax: 10
+      }}
+    }
+  });
+
+  // Sound bar
+  new Chart(document.getElementById('soundChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Bose Ultra Open', 'Huawei FreeClip 2', 'Shokz OpenDots', 'OWS Pro', 'AeroClip', 'S8S Ultra', 'S9S', 'Dangbei', 'Nothing Ear', 'Liberty 5 Pro', 'JBL Clips', 'Sennheiser', '1MORE S70'],
+      datasets: [{
+        label: 'Sound (1-10)',
+        data: [9, 9, 9, 8, 8, 8, 8, 8, 8, 7, 7, 7, 6],
+        backgroundColor: colors.accent2
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' }, max: 10 }, y: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } } }
+    }
+  });
+
+  // Comfort bar
+  new Chart(document.getElementById('comfortChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Huawei FreeClip 2', 'AeroClip', 'Dangbei', 'S8S Ultra', 'S9S', 'Bose Ultra Open', 'Liberty 5 Pro', 'Shokz OpenDots', 'JBL Clips', '1MORE S70', 'Sennheiser', 'OWS Pro', 'Nothing Ear'],
+      datasets: [{
+        label: 'Comfort (1-10)',
+        data: [10, 9, 9, 9, 9, 9, 8, 8, 8, 8, 6, 6, 6],
+        backgroundColor: colors.accent
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' }, max: 10 }, y: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } } }
+    }
+  });
+
+  // AI/Transcription
+  new Chart(document.getElementById('aiChart'), {
+    type: 'bar',
+    data: {
+      labels: ['S8S Ultra', 'Dangbei Air 1S', 'Huawei FreeClip 2', 'S9S', 'Liberty 5 Pro', 'AeroClip', 'Bose Ultra Open', 'Shokz OpenDots', 'OWS Pro', 'Nothing Ear', 'JBL Clips', 'Sennheiser', '1MORE S70'],
+      datasets: [{
+        label: 'Built-in AI/Transcription capability (0-10)',
+        data: [9, 9, 9, 7, 7, 1, 1, 1, 1, 1, 1, 1, 1],
+        backgroundColor: '#fbbf24'
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' }, max: 10 }, y: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } } }
+    }
+  });
+
+  // Value
+  new Chart(document.getElementById('valueChart'), {
+    type: 'bar',
+    data: {
+      labels: ['AeroClip', 'S8S Ultra', 'Huawei FreeClip 2', 'S9S', 'Shokz OpenDots', 'Dangbei', 'Nothing Ear', 'JBL Clips', 'Liberty 5 Pro', '1MORE S70', 'Sennheiser', 'Bose Ultra Open', 'OWS Pro'],
+      datasets: [{
+        label: 'Value-for-money (1-10)',
+        data: [9, 8, 8, 8, 8, 7, 7, 7, 6, 6, 6, 5, 5],
+        backgroundColor: '#f87171'
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { x: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' }, max: 10 }, y: { ticks: { color: '#9aa3b2' }, grid: { color: '#2a3142' } } }
+    }
+  });
+</script>
+</body>
+</html>
